@@ -17,20 +17,45 @@ public class Game {
 	}
 	
 	public void startGame(){
-		
-	}
+		for (int i = 0; i < 52; i++) {
+			System.out.println(deck.getDeck()[i].toString());
+		}
 	
+	}
 	public void addToPot(int bet){
 		this.pot = this.pot + bet;
 	}
+	
 	public int getPot(){
 		return this.pot;
 	}
-	public void emptyPot(){
-		this.pot = 0;
+	
+	public void dealHands(){
+		Card cards[] = new Card[2];
+		for (int i = 0; i < 2; i++){
+		cards = new Card[]{deck.deal(), deck.deal()};
+		players[i].setHand(cards);
+		}
 	}
 	
+	public void dealFlop(){
+		Card cards[] = new Card[]{deck.deal(), deck.deal(), deck.deal()};
+		this.theFlop = cards;
+	}
 	
+	public void dealTurn(){
+		this.theTurn = deck.deal();
+	}
 	
+	public void dealRiver(){
+		this.theRiver = deck.deal();
+	}
+	
+	public void clearRound(){
+		this.pot = 0;
+		theFlop = new Card[3];
+		theTurn = new Card();
+		theRiver = new Card();
+	}
 	
 }

@@ -49,4 +49,11 @@ public class Deck {
 	public Card[] getDeck() {
 		return deck;
 	}
+	
+	public Card deal(){
+		Card topCard = deck[this.topOfDeck];
+		this.topOfDeck++;
+		return topCard;
+	}
+	
 }
