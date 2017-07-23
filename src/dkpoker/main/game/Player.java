@@ -47,5 +47,9 @@ public class Player {
 		return hand;
 	}
 	
+	public String displayHand() {
+		return "Your hand: " + hand[0].toString() + " and " + hand[1].toString();
+	}
+	
 	
 }

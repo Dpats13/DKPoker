@@ -25,15 +25,12 @@ public class Game {
 	}
 	
 	public void startGame(){
-		for (int i = 0; i < 52; i++) {
-			System.out.println(deck.getDeck()[i].toString());
-		}
-		deck.displayDeck();
 		System.out.println("Shuffled Deck: ");
 		deck.shuffle();
 		deck.displayDeck();
 		dealHands();
-		deck.displayDeck();
+		System.out.println("Player 1s hand: " + players[0].displayHand());
+		System.out.println("Player 2s hand: " + players[1].displayHand());
 		dealFlop();
 		deck.displayDeck();
 		dealTurn();
@@ -52,7 +49,7 @@ public class Game {
 	
 	public void dealHands(){
 		Card[] cards = new Card[2];
-		for (int i = 0; i < 2; i++){
+		for (int i = 0; i < players.length; i++){
 			cards = new Card[]{deck.deal(), deck.deal()};
 			this.players[i].setHand(cards);
 		}
