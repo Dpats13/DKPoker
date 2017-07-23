@@ -48,4 +48,14 @@ public class Deck {
 	public Card[] getDeck() {
 		return deck;
 	}
+	
+	public void shuffle() {
+		
+	}
+	
+	private void swap(int x, int y) {
+		Card temp = deck[x];
+		deck[y] = deck[x];
+		
+	}
 }
