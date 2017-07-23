@@ -57,6 +57,14 @@ public class Deck {
 		return topCard;
 	}
 	
+	public int getTopOfDeck() {
+		return topOfDeck;
+	}
+
+	public void setTopOfDeck(int topOfDeck) {
+		this.topOfDeck = topOfDeck;
+	}
+
 	public void shuffle() {
 		for (int i = 0; i < 52; i++) {
 			double r = Math.random();

@@ -63,9 +63,16 @@ public class Player {
 	}
 	
 	public void addToHand(Card card) {
-		System.out.println(currentHandIndex);
-		hand[currentHandIndex] = card;
+		this.hand[currentHandIndex] = card;
 		currentHandIndex++;
+	}
+
+	public int getCurrentHandIndex() {
+		return currentHandIndex;
+	}
+
+	public void setCurrentHandIndex(int currentHandIndex) {
+		this.currentHandIndex = currentHandIndex;
 	}
 	
 }

@@ -26,18 +26,68 @@ public class Game {
 		System.out.println("Welcome to Dan and Kyle's Bullshit Poker!\n");
 		System.out.println("Let's get started!\n");
 		createPlayers();
-		if (numberOfPlayersWithMoney() > 1) {
-			deck.shuffle();
-			dealHands();
-			System.out.println(players[0].displayPlayer());
-			System.out.println(players[1].displayPlayer());
-			dealFlop();
-			dealTurn();
-			dealRiver();
-			displayGameStats();
-			rankHand(players[0]);
-			rankHand(players[1]);
+		
+		startGame();
+		System.out.println(players[0].displayPlayer());
+		System.out.println(players[1].displayPlayer());
+		
+		
+		
+		displayGameStats();
+		rankHand(players[0]);
+		rankHand(players[1]);
+	}
+	
+	public void startGame(){
+		while (numberOfPlayersWithMoney() > 1){
+			phase0();
+			phase1();
+			phase2();
+			phase3();
+			phase4();
+			phase5();
+			phase6();
 		}
+	}
+	
+	public void betting(){
+		
+	}
+	
+	public void phase0(){ //deal
+		deck.shuffle();
+		dealHands();
+		betting();
+	}
+	
+	public void phase1(){ //the flop
+		dealFlop();
+		betting();
+	}
+	public void phase2(){ //the turn
+		dealTurn();
+		betting();
+	}
+	
+	public void phase3(){ //the river
+		dealRiver();
+		betting();
+	}
+	
+	public void phase4(){ //compare cards
+		
+	}
+	
+	public void phase5(){ //the pot
+		
+	}
+	
+	public void phase6(){ //reset for next round
+		for (int i = 0; i < this.numberOfPlayers; i++){
+			players[i].setCurrentHandIndex(2);
+			players[i].setMoney(players[i].getMoney()-10);
+		}
+		this.deck.setTopOfDeck(0);
 		
 	}
 	
@@ -132,10 +182,10 @@ public class Game {
 		System.out.println(player.getName() + "'s" + " hand: " + hand);
 	}
 	
-	public int numberOfPlayersWithMoney() {
+	public int numberOfPlayersWithMoney(){
 		int playersWithMoney = 0;
-		for (int i = 0; i < this.numberOfPlayers; i++) {
-			if (players[i].getMoney() > 0) {
+		for (int i = 0; i < this.numberOfPlayers; i++){
+			if(players[i].getMoney() > 0){
 				playersWithMoney++;
 			}
 		}
