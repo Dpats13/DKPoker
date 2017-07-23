@@ -22,9 +22,6 @@ public class Game {
 		theFlop[2] = new Card();
 		this.theTurn = new Card();
 		this.theRiver = new Card();
-		System.out.println(this.theFlop[0].toString());
-		System.out.println(this.players[0].getName());
-		
 	}
 	
 	public void start(){
@@ -40,6 +37,8 @@ public class Game {
 		dealTurn();
 		dealRiver();
 		displayGameStats();
+		rankHand(players[0]);
+		rankHand(players[1]);
 	}
 	
 	public void displayGameStats(){
@@ -124,7 +123,10 @@ public class Game {
 	public void rankHand(Player player) {
 		String hand = "";
 		for (int i = 0; i < player.getHand().length; i++) {
-			hand += player.getHand()[i].toString() + ", ";
+			hand += player.getHand()[i].toString();
+			if (i < 6){
+				hand += player.getHand()[i].toString() + ", ";
+			}
 		}
 		System.out.println(player.getName() + "'s" + " hand: " + hand);
 	}
