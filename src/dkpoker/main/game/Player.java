@@ -10,10 +10,9 @@ public class Player {
 	public Player(){
 		name = "";
 		hand = new Card[7];
-		money = 0;
+		money = 100;
 		handRank = 0;
 		currentHandIndex = 2;
-
 	}
 	
 	public void setHand(Card card[]){
@@ -64,6 +63,7 @@ public class Player {
 	}
 	
 	public void addToHand(Card card) {
+		System.out.println(currentHandIndex);
 		hand[currentHandIndex] = card;
 		currentHandIndex++;
 	}

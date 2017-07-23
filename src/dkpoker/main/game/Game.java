@@ -12,9 +12,7 @@ public class Game {
 	private int numberOfPlayers;
 	
 	public Game(){
-		this.players = new Player[2];
-		players[0] = new Player();
-		players[1] = new Player();
+		this.players = new Player[5];
 		this.deck = new Deck();
 		this.theFlop = new Card[3];
 		theFlop[0] = new Card();
@@ -28,17 +26,19 @@ public class Game {
 		System.out.println("Welcome to Dan and Kyle's Bullshit Poker!\n");
 		System.out.println("Let's get started!\n");
 		createPlayers();
-		System.out.println("Shuffled Deck: ");
-		deck.shuffle();
-		dealHands();
-		System.out.println(players[0].displayPlayer());
-		System.out.println(players[1].displayPlayer());
-		dealFlop();
-		dealTurn();
-		dealRiver();
-		displayGameStats();
-		rankHand(players[0]);
-		rankHand(players[1]);
+		if (numberOfPlayersWithMoney() > 1) {
+			deck.shuffle();
+			dealHands();
+			System.out.println(players[0].displayPlayer());
+			System.out.println(players[1].displayPlayer());
+			dealFlop();
+			dealTurn();
+			dealRiver();
+			displayGameStats();
+			rankHand(players[0]);
+			rankHand(players[1]);
+		}
+		
 	}
 	
 	public void displayGameStats(){
@@ -56,7 +56,7 @@ public class Game {
 	}
 	
 	public void dealHands(){
-		for (int i = 0; i < players.length; i++){
+		for (int i = 0; i < numberOfPlayers; i++){
 			Card[] cards = new Card[7];
 			cards[0] = deck.deal();
 			cards[1] = deck.deal();
@@ -68,7 +68,7 @@ public class Game {
 		Card cards[] = new Card[]{deck.deal(), deck.deal(), deck.deal()};
 		this.theFlop = cards;
 		//now add to players hand
-		for (int i = 0; i < players.length; i++) {
+		for (int i = 0; i < numberOfPlayers; i++) {
 			for (int cardsIndex = 0; cardsIndex < cards.length; cardsIndex++) {
 				players[i].addToHand(cards[cardsIndex]);
 			}
@@ -78,7 +78,7 @@ public class Game {
 	public void dealTurn(){
 		this.theTurn = deck.deal();
 		//now add to players hand
-		for (int i = 0; i < players.length; i++) {
+		for (int i = 0; i < numberOfPlayers; i++) {
 			players[i].addToHand(this.theTurn);
 		}
 	}
@@ -86,7 +86,7 @@ public class Game {
 	public void dealRiver(){
 		this.theRiver = deck.deal();
 		//now add to players hand
-		for (int i = 0; i < players.length; i++) {
+		for (int i = 0; i < numberOfPlayers; i++) {
 			players[i].addToHand(this.theRiver);
 		}
 	}
@@ -116,6 +116,7 @@ public class Game {
 		this.numberOfPlayers = scanner.nextInt();
 		for(int i = 0; i < this.numberOfPlayers; i++){
 			System.out.println("Player " + (i+1) + ": What is your name?\n");
+			players[i] = new Player();
 			players[i].setName(scanner.next());
 		}
 		scanner.close();
@@ -125,10 +126,20 @@ public class Game {
 		for (int i = 0; i < player.getHand().length; i++) {
 			hand += player.getHand()[i].toString();
 			if (i < 6){
-				hand += player.getHand()[i].toString() + ", ";
+				hand += ", ";
 			}
 		}
 		System.out.println(player.getName() + "'s" + " hand: " + hand);
+	}
+	
+	public int numberOfPlayersWithMoney() {
+		int playersWithMoney = 0;
+		for (int i = 0; i < this.numberOfPlayers; i++) {
+			if (players[i].getMoney() > 0) {
+				playersWithMoney++;
+			}
+		}
+		return playersWithMoney;
 	}
 	
 }
