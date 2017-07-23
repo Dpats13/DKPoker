@@ -31,9 +31,6 @@ public class Game {
 		startGame();
 		System.out.println(players[0].displayPlayer());
 		System.out.println(players[1].displayPlayer());
-		
-		
-		
 		displayGameStats();
 		rankHand(players[0]);
 		rankHand(players[1]);
