@@ -20,7 +20,7 @@ public class Deck {
 	private void generateDiamonds() {
 		int count = 0;
 		for (int i = 0; i < 13; i++) {
-			deck[i] = new Card(values[count], "Diamonds", "Deck");
+			deck[i] = new Card(values[count], "Diamonds");
 			count++;
 		}
 	}
@@ -28,7 +28,7 @@ public class Deck {
 	private void generateHearts() {
 		int count = 0;
 		for (int i = 13; i < 26; i++) {
-			deck[i] = new Card(values[count], "Hearts", "Deck");
+			deck[i] = new Card(values[count], "Hearts");
 			count++;
 		}
 	}
@@ -36,7 +36,7 @@ public class Deck {
 	private void generateClubs() {
 		int count = 0;
 		for (int i = 26; i < 39; i++) {
-			deck[i] = new Card(values[count], "Clubs", "Deck");
+			deck[i] = new Card(values[count], "Clubs");
 			count++;
 		}
 	}
@@ -44,7 +44,7 @@ public class Deck {
 	private void generateSpaids() {
 		int count = 0;
 		for (int i = 39; i < 52; i++) {
-			deck[i] = new Card(values[count], "Spaids", "Deck");
+			deck[i] = new Card(values[count], "Spaids");
 			count++;
 		}
 	}
@@ -76,7 +76,7 @@ public class Deck {
 	
 	public void displayDeck() {
 		for (int i = 0; i < 52; i++) {
-			System.out.println(deck[i].toString());
+			System.out.println(deck[i].toString() + " topOfDeck = " + this.topOfDeck);
 		}
 	}
 

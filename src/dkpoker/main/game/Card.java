@@ -10,7 +10,7 @@ public class Card {
 		this.suit = "";
 	}
 	
-	public Card(String value, String suit, String loc) {
+	public Card(String value, String suit) {
 		this.value = value;	
 		this.suit = suit;
 	}

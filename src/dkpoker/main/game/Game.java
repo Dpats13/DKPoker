@@ -1,19 +1,27 @@
 package dkpoker.main.game;
 
 public class Game {
-	private Player players[] = new Player[2];
-	private Deck deck = new Deck();
-	private Card theFlop[] = new Card[3];
-	private Card theTurn = new Card();
-	private Card theRiver = new Card();
+	private Player[] players;
+	private Deck deck;
+	private Card[] theFlop;
+	private Card theTurn;
+	private Card theRiver;
 	private int pot;
 	
 	public Game(){
-		players = new Player[2];
-		deck = new Deck();
-		theFlop = new Card[3];
-		theTurn = new Card();
-		theRiver = new Card();
+		this.players = new Player[2];
+		players[0] = new Player();
+		players[1] = new Player();
+		this.deck = new Deck();
+		this.theFlop = new Card[3];
+		theFlop[0] = new Card();
+		theFlop[1] = new Card();
+		theFlop[2] = new Card();
+		this.theTurn = new Card();
+		this.theRiver = new Card();
+		System.out.println(this.theFlop[0].toString());
+		System.out.println(this.players[0].getName());
+		
 	}
 	
 	public void startGame(){
@@ -23,6 +31,14 @@ public class Game {
 		deck.displayDeck();
 		System.out.println("Shuffled Deck: ");
 		deck.shuffle();
+		deck.displayDeck();
+		dealHands();
+		deck.displayDeck();
+		dealFlop();
+		deck.displayDeck();
+		dealTurn();
+		deck.displayDeck();
+		dealRiver();
 		deck.displayDeck();
 	}
 	
@@ -35,10 +51,10 @@ public class Game {
 	}
 	
 	public void dealHands(){
-		Card cards[] = new Card[2];
+		Card[] cards = new Card[2];
 		for (int i = 0; i < 2; i++){
-		cards = new Card[]{deck.deal(), deck.deal()};
-		players[i].setHand(cards);
+			cards = new Card[]{deck.deal(), deck.deal()};
+			this.players[i].setHand(cards);
 		}
 	}
 	
