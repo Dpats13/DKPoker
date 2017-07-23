@@ -28,17 +28,69 @@ public class Game {
 		System.out.println("Welcome to Dan and Kyle's Bullshit Poker!\n");
 		System.out.println("Let's get started!\n");
 		createPlayers();
-		System.out.println("Shuffled Deck: ");
-		deck.shuffle();
-		dealHands();
+		startGame();
 		System.out.println(players[0].displayPlayer());
 		System.out.println(players[1].displayPlayer());
-		dealFlop();
-		dealTurn();
-		dealRiver();
+		
+		
+		
 		displayGameStats();
 		rankHand(players[0]);
 		rankHand(players[1]);
+	}
+	
+	public void startGame(){
+		System.out.println(numberOfPlayersWithMoney());
+		while (numberOfPlayersWithMoney() > 1){
+			phase0();
+			phase1();
+			phase2();
+			phase3();
+			phase4();
+			phase5();
+			phase6();
+		}
+	}
+	
+	public void betting(){
+		
+	}
+	
+	public void phase0(){ //deal
+		deck.shuffle();
+		dealHands();
+		betting();
+	}
+	
+	public void phase1(){ //the flop
+		dealFlop();
+		betting();
+	}
+	public void phase2(){ //the turn
+		dealTurn();
+		betting();
+	}
+	
+	public void phase3(){ //the river
+		dealRiver();
+		betting();
+	}
+	
+	public void phase4(){ //compare cards
+		
+	}
+	
+	public void phase5(){ //the pot
+		
+	}
+	
+	public void phase6(){ //reset for next round
+		for (int i = 0; i < this.numberOfPlayers; i++){
+			players[i].setCurrentHandIndex(2);
+			players[i].setMoney(players[i].getMoney()-10);
+		}
+		this.deck.setTopOfDeck(0);
+		
 	}
 	
 	public void displayGameStats(){
@@ -125,10 +177,20 @@ public class Game {
 		for (int i = 0; i < player.getHand().length; i++) {
 			hand += player.getHand()[i].toString();
 			if (i < 6){
-				hand += player.getHand()[i].toString() + ", ";
+				hand += ", ";
 			}
 		}
 		System.out.println(player.getName() + "'s" + " hand: " + hand);
+	}
+	
+	public int numberOfPlayersWithMoney(){
+		int playersWithMoney = 0;
+		for (int i = 0; i < this.numberOfPlayers; i++){
+			if(players[i].getMoney() > 0){
+				playersWithMoney++;
+			}
+		}
+		return playersWithMoney;
 	}
 	
 }
