@@ -1,5 +1,7 @@
 package dkpoker.main.game;
 
+import java.util.Scanner;
+
 public class Game {
 	private Player[] players;
 	private Deck deck;
@@ -7,6 +9,7 @@ public class Game {
 	private Card theTurn;
 	private Card theRiver;
 	private int pot;
+	private int numberOfPlayers;
 	
 	public Game(){
 		this.players = new Player[2];
@@ -21,22 +24,36 @@ public class Game {
 		this.theRiver = new Card();
 		System.out.println(this.theFlop[0].toString());
 		System.out.println(this.players[0].getName());
-		
 	}
 	
-	public void startGame(){
+	public void start(){
+		System.out.println("Welcome to Dan and Kyle's Bullshit Poker!\n");
+		System.out.println("Let's get started!\n");
+		createPlayers();
 		System.out.println("Shuffled Deck: ");
 		deck.shuffle();
-		deck.displayDeck();
 		dealHands();
-		System.out.println("Player 1s hand: " + players[0].displayHand());
-		System.out.println("Player 2s hand: " + players[1].displayHand());
+		System.out.println(players[0].displayPlayer());
+		System.out.println(players[1].displayPlayer());
 		dealFlop();
-		deck.displayDeck();
 		dealTurn();
-		deck.displayDeck();
 		dealRiver();
-		deck.displayDeck();
+	}
+	
+	public String displayGameStats(){
+		return " ";
+	}
+	
+	public String displayFlop(){
+		return "The Flop: " + theFlop[0] + ", " + theFlop[1] + ", " + theFlop[2] + "\n";
+	}
+	
+	public String displayTurn(){
+		return "The Turn: " + theTurn + "\n";
+	}
+	
+	public String displayRiver(){
+		return "The River: " + theRiver + "\n";
 	}
 	
 	public void addToPot(int bet){
@@ -73,6 +90,17 @@ public class Game {
 		theFlop = new Card[3];
 		theTurn = new Card();
 		theRiver = new Card();
+	}
+	
+	public void createPlayers(){
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("How many Players are there?\n");
+		this.numberOfPlayers = scanner.nextInt();
+		for(int i = 0; i < this.numberOfPlayers; i++){
+			System.out.println("Player " + (i+1) + ": What is your name?\n");
+			players[i].setName(scanner.next());
+		}
+		scanner.close();	
 	}
 	
 }
