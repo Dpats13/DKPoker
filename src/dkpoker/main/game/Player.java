@@ -5,12 +5,15 @@ public class Player {
 	private Card hand[];
 	private int money;
 	private int handRank;
+	private int currentHandIndex;
 	
 	public Player(){
 		name = "";
 		hand = new Card[7];
 		money = 0;
 		handRank = 0;
+		currentHandIndex = 2;
+
 	}
 	
 	public void setHand(Card card[]){
@@ -60,5 +63,9 @@ public class Player {
 		return (this.getName() + ":\n" + this.displayHand() + "\n    Money: " + this.getMoney() + "\n");	
 	}
 	
+	public void addToHand(Card card) {
+		hand[currentHandIndex] = card;
+		currentHandIndex++;
+	}
 	
 }
