@@ -20,8 +20,12 @@ public class Game {
 		for (int i = 0; i < 52; i++) {
 			System.out.println(deck.getDeck()[i].toString());
 		}
-	
+		deck.displayDeck();
+		System.out.println("Shuffled Deck: ");
+		deck.shuffle();
+		deck.displayDeck();
 	}
+	
 	public void addToPot(int bet){
 		this.pot = this.pot + bet;
 	}
