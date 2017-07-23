@@ -19,8 +19,6 @@ public class Game {
 		theFlop[2] = new Card();
 		this.theTurn = new Card();
 		this.theRiver = new Card();
-		System.out.println(this.theFlop[0].toString());
-		System.out.println(this.players[0].getName());
 		
 	}
 	
@@ -32,11 +30,13 @@ public class Game {
 		System.out.println("Player 1s hand: " + players[0].displayHand());
 		System.out.println("Player 2s hand: " + players[1].displayHand());
 		dealFlop();
-		deck.displayDeck();
+		displayFlop();
 		dealTurn();
-		deck.displayDeck();
+		displayTurn();
 		dealRiver();
-		deck.displayDeck();
+		displayRiver();
+		rankHand(players[0]);
+		rankHand(players[1]);
 	}
 	
 	public void addToPot(int bet){
@@ -48,9 +48,11 @@ public class Game {
 	}
 	
 	public void dealHands(){
-		Card[] cards = new Card[2];
 		for (int i = 0; i < players.length; i++){
-			cards = new Card[]{deck.deal(), deck.deal()};
+			Card[] cards = new Card[7];
+			cards[0] = deck.deal();
+			cards[1] = deck.deal();
+			System.out.println("card 0: " + cards[0] + " card 1: " + cards[1]);
 			this.players[i].setHand(cards);
 		}
 	}
@@ -58,14 +60,40 @@ public class Game {
 	public void dealFlop(){
 		Card cards[] = new Card[]{deck.deal(), deck.deal(), deck.deal()};
 		this.theFlop = cards;
+		//now add to players hand
+		for (int i = 0; i < players.length; i++) {
+			for (int cardsIndex = 0; cardsIndex < cards.length; cardsIndex++) {
+				players[i].addToHand(cards[cardsIndex]);
+			}
+		}
 	}
 	
 	public void dealTurn(){
 		this.theTurn = deck.deal();
+		//now add to players hand
+		for (int i = 0; i < players.length; i++) {
+			players[i].addToHand(this.theTurn);
+		}
 	}
 	
 	public void dealRiver(){
 		this.theRiver = deck.deal();
+		//now add to players hand
+		for (int i = 0; i < players.length; i++) {
+			players[i].addToHand(this.theRiver);
+		}
+	}
+	
+	public void displayFlop() {
+		System.out.println("The Flop: " + theFlop[0].toString() + ", " + theFlop[1].toString() + ", " + theFlop[2].toString());
+	}
+	
+	public void displayRiver() {
+		System.out.println("The River: " + theRiver.toString());
+	}
+	
+	public void displayTurn() {
+		System.out.println("The Turn: " + theTurn.toString());
 	}
 	
 	public void clearRound(){
@@ -73,6 +101,14 @@ public class Game {
 		theFlop = new Card[3];
 		theTurn = new Card();
 		theRiver = new Card();
+	}
+	
+	public void rankHand(Player player) {
+		String hand = "";
+		for (int i = 0; i < player.getHand().length; i++) {
+			hand += player.getHand()[i].toString() + ", ";
+		}
+		System.out.println(player.getName() + "'s" + " hand: " + hand);
 	}
 	
 }
