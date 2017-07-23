@@ -5,7 +5,7 @@ public class Card {
 	private String value;
 	private String suit;
 	
-	public Card(){
+	public Card() {
 		this.value = "";	
 		this.suit = "";
 	}
