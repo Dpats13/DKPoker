@@ -1,7 +1,5 @@
 package dkpoker.main.game;
 
-import java.math.*;
-
 public class Deck {
 	private Card deck[];
 	private int topOfDeck;
