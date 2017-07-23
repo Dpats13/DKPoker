@@ -17,7 +17,10 @@ public class Game {
 	}
 	
 	public void startGame(){
-		
+		deck.displayDeck();
+		System.out.println("Shuffled Deck: ");
+		deck.shuffle();
+		deck.displayDeck();
 	}
 	
 	public void addToPot(int bet){

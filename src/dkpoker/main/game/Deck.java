@@ -1,4 +1,7 @@
 package dkpoker.main.game;
+
+import java.math.*;
+
 public class Deck {
 	private Card deck[];
 	private int topOfDeck;
@@ -51,12 +54,23 @@ public class Deck {
 	}
 	
 	public void shuffle() {
+		for (int i = 0; i < 52; i++) {
+			double r = Math.random();
+			int z = (int) (i*r + 1);
+			swap(i, z);
+		}
 		
 	}
 	
 	private void swap(int x, int y) {
 		Card temp = deck[x];
-		deck[y] = deck[x];
-		
+		deck[x] = deck[y];
+		deck[y] = temp;
+	}
+	
+	public void displayDeck() {
+		for (int i = 0; i < 52; i++) {
+			System.out.println(deck[i].toString());
+		}
 	}
 }
