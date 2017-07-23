@@ -1,5 +1,6 @@
 package dkpoker.main.game;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -10,9 +11,10 @@ public class Game {
 	private Card theRiver;
 	private int pot;
 	private int numberOfPlayers;
-	private Scanner scanner = new Scanner(System.in);
-	
+	private Scanner scanner;
+
 	public Game() {
+		this.scanner = new Scanner(System.in);
 		this.players = new Player[5];
 		this.deck = new Deck();
 		this.theFlop = new Card[3];
@@ -46,16 +48,33 @@ public class Game {
 			flopPhase();
 			turnPhase();
 			riverPhase();
-			comparePhase();
+			rankPhase();
 			winPhase();
 			resetPhase();
 		}
 	}
 
 	public void betting() {
-		System.out.println("How many money to bet?\n");
-		int bet = this.scanner.nextInt();
-		System.out.println(bet + "\n");
+		this.scanner = new Scanner(System.in);
+		boolean goodInput = true;
+		int bet = 0;
+		for (int i = 0; i < this.numberOfPlayers; i++) {
+			System.out.println(players[i].getName() + ", please enter your bet: ");
+			String strBet = scanner.nextLine();
+			try {
+				bet = Integer.parseInt(strBet);
+			} catch (NumberFormatException e) {
+				System.out.println(strBet);
+				System.out.println("Enter an integer and try again.");
+				i--;
+				goodInput = false;
+			}
+			if (goodInput) {
+				players[i].setMoney(players[i].getMoney() - bet);
+				addToPot(bet);
+				System.out.println("Bet submitted thank you, Current Pot: " + pot);
+			}
+		}
 	}
 
 	public void dealPhase() { // deal
@@ -66,24 +85,31 @@ public class Game {
 
 	public void flopPhase() { // the flop
 		dealFlop();
+		displayFlop();
 		betting();
 	}
 
 	public void turnPhase() { // the turn
 		dealTurn();
+		displayTurn();
 		betting();
 	}
 
 	public void riverPhase() { // the river
 		dealRiver();
+		displayRiver();
 		betting();
 	}
 
-	public void comparePhase() { // compare cards
+	public void winPhase() { // the pot
 
 	}
 
-	public void winPhase() { // the pot
+	public void rankPhase() { // compare cards
+
+	}
+
+	public void winnerPhase() { // the pot
 
 	}
 
@@ -92,16 +118,14 @@ public class Game {
 			if (players[i] == null || players[i].getMoney() <= 0) {
 				players[i] = null;
 			} else {
-
 				players[i].setCurrentHandIndex(2);
 				players[i].setMoney(players[i].getMoney() - 10);
 				if (players[2] != null)
 					players[2].setMoney(players[2].getMoney() - 15);
 			}
+			this.setPot(0);
+			this.deck.setTopOfDeck(0);
 		}
-		this.setPot(0);
-		this.deck.setTopOfDeck(0);
-
 	}
 
 	public void setPot(int pot) {
@@ -187,6 +211,7 @@ public class Game {
 	}
 
 	public void createPlayers() {
+		this.scanner = new Scanner(System.in);
 		System.out.println("How many Players are there?\n");
 		this.numberOfPlayers = scanner.nextInt();
 		for (int i = 0; i < this.numberOfPlayers; i++) {
@@ -198,10 +223,10 @@ public class Game {
 
 	public void rankHand(Player player) {
 		String hand = "";
-		if(player != null){
+		if (player != null) {
 			for (int i = 0; i < player.getHand().length; i++) {
-			hand += player.getHand()[i].toString();
-				if (i < 6){
+				hand += player.getHand()[i].toString();
+				if (i < 6) {
 					hand += ", ";
 				}
 			}
