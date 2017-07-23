@@ -6,6 +6,12 @@ public class Card {
 	private String suit;
 	private String loc;
 	
+	public Card(){
+		this.value = "";	
+		this.suit = "";
+		this.loc = "";
+	}
+	
 	public Card(String value, String suit, String loc) {
 		this.value = value;	
 		this.suit = suit;
@@ -15,5 +21,5 @@ public class Card {
 	public String toString() {
 		return value + " of " + suit + " located in " + loc;
 	}
-	
+
 }

@@ -1,7 +1,7 @@
 package dkpoker.main.game;
 public class Deck {
-	
-	private Card[] deck;
+	private Card deck[];
+	private int topOfDeck;
 	private String[] values; 
 	
 	public Deck() {
@@ -11,6 +11,7 @@ public class Deck {
 		generateHearts();
 		generateClubs();
 		generateSpaids();
+		topOfDeck = 0;
 	}
 	
 	private void generateDiamonds() {
