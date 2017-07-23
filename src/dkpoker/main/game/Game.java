@@ -1,5 +1,6 @@
 package dkpoker.main.game;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -40,49 +41,71 @@ public class Game {
 	
 	public void startGame(){
 		while (numberOfPlayersWithMoney() > 1){
-			phase0();
-			phase1();
-			phase2();
-			phase3();
-			phase4();
-			phase5();
-			phase6();
+			dealPhase();
+			flopPhase();
+			turnPhase();
+			riverPhase();
+			rankPhase();
+			winnerPhase();
+			resetPhase();
 		}
 	}
 	
-	public void betting(){
-		
+	public void betting() {
+		Scanner scanner = new Scanner(System.in);
+		boolean goodInput = true;
+		int bet = 0;
+		for (int i = 0; i < this.numberOfPlayers; i++) {
+			System.out.println(players[i].getName() + ", please enter your bet: ");
+			String strBet = scanner.nextLine();
+			try {
+				bet = Integer.parseInt(strBet);
+			}
+			catch (NumberFormatException e) {
+				System.out.println("Enter an integer and try again.");
+				i--; 
+				goodInput = false;
+			}
+			if (goodInput) {
+				players[i].setMoney(players[i].getMoney() - bet);
+				addToPot(bet);
+				System.out.println("Bet submitted thank you, Current Pot: " + pot);
+			}
+		}
 	}
 	
-	public void phase0(){ //deal
+	public void dealPhase(){ //deal
 		deck.shuffle();
 		dealHands();
 		betting();
 	}
 	
-	public void phase1(){ //the flop
+	public void flopPhase(){ //the flop
 		dealFlop();
+		displayFlop();
 		betting();
 	}
-	public void phase2(){ //the turn
+	public void turnPhase(){ //the turn
 		dealTurn();
+		displayTurn();
 		betting();
 	}
 	
-	public void phase3(){ //the river
+	public void riverPhase(){ //the river
 		dealRiver();
+		displayRiver();
 		betting();
 	}
 	
-	public void phase4(){ //compare cards
+	public void rankPhase(){ //compare cards
 		
 	}
 	
-	public void phase5(){ //the pot
+	public void winnerPhase(){ //the pot
 		
 	}
 	
-	public void phase6(){ //reset for next round
+	public void resetPhase(){ //reset for next round
 		for (int i = 0; i < this.numberOfPlayers; i++){
 			players[i].setCurrentHandIndex(2);
 			players[i].setMoney(players[i].getMoney()-10);
@@ -169,7 +192,6 @@ public class Game {
 			players[i] = new Player();
 			players[i].setName(scanner.next());
 		}
-		scanner.close();
 	}
 	public void rankHand(Player player) {
 		String hand = "";
