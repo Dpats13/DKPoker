@@ -10,4 +10,8 @@ public class Player {
 		hand = new Card[2];
 		money = 0;
 	}
+	
+	public void clearHand(){
+		
+	}
 }
