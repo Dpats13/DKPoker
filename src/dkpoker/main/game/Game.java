@@ -1,6 +1,5 @@
 package dkpoker.main.game;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -52,7 +51,10 @@ public class Game {
 		Scanner scanner = new Scanner(System.in);
 		boolean goodInput = true;
 		int bet = 0;
+		System.out.println("=======================================$$$$$ LET THE BETTING BEGIN $$$$$=======================================");
 		for (int i = 0; i < this.numberOfPlayers; i++) {
+			System.out.println(players[i].getName().toUpperCase() + "'S TURN");
+			displayBetScreen(i);
 			System.out.println(players[i].getName() + ", please enter your bet: ");
 			String strBet = scanner.nextLine();
 			try {
@@ -209,6 +211,35 @@ public class Game {
 			}
 		}
 		return playersWithMoney;
+	}
+	
+	public void displayBetScreen(int playerIndex) {
+		String cardsOnTable = "none";
+		
+		if (theFlop[0].getValue() != "") {
+			cardsOnTable = "";
+			for (int i = 0; i < theFlop.length; i++) {
+				if (i == (theFlop.length - 1)) {
+					cardsOnTable += theFlop[i].toString() + ", ";
+				}
+				else {
+					cardsOnTable += theFlop[i].toString() + ", ";
+				}
+			}
+		}
+		
+		if (theTurn.getValue() != "") {
+			cardsOnTable += theTurn.toString() + ", ";
+		}
+		
+		if (theRiver.getValue() != "") {
+			cardsOnTable += theRiver.toString();
+		}
+		
+		System.out.println(players[playerIndex].displayHand());
+		System.out.println("Cards on table: " + cardsOnTable);
+		
+		
 	}
 	
 }

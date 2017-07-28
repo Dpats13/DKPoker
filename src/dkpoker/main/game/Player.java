@@ -9,7 +9,7 @@ public class Player {
 	
 	public Player(){
 		name = "";
-		hand = new Card[7];
+		hand = new Card[2];
 		money = 100;
 		handRank = 0;
 		currentHandIndex = 2;
@@ -20,7 +20,7 @@ public class Player {
 	}
 	
 	public void clearHand(){
-		hand = new Card[7];
+		hand = new Card[2];
 	}
 	
 	public void bet(int amount){
@@ -52,7 +52,14 @@ public class Player {
 	}
 	
 	public String displayHand() {
-		return  "    Hand: " + hand[0].toString() + ", " + hand[1].toString();
+		if (hand[0] != null) {
+			return name + "'s hand: " + hand[0].toString() + ", " + hand[1].toString();
+		}
+		else {
+			
+			return "Cards not dealt yet";
+		}
+		
 	}
 	public int setHandRank(Card[] hand){
 		int rank = 0;	
