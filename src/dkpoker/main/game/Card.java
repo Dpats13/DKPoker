@@ -21,7 +21,7 @@ public class Card {
 		this.suit = suit;
 	}
 
-	public Card(){
+	public Card() {
 		this.value = "";	
 		this.suit = "";
 	}
