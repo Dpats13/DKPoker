@@ -226,8 +226,8 @@ public class Game {
 	public void rankHand(Player player) {
 		String hand = "";
 		if (player != null) {
-			for (int i = 0; i < player.getHand().length; i++) {
-				hand += player.getHand()[i].toString();
+			for (int i = 0; i < player.getHand().getPlayerHand().length; i++) {
+				hand += player.getHand().getCardAtIndex(i).toString();
 				if (i < 6) {
 					hand += ", ";
 				}
@@ -269,7 +269,7 @@ public class Game {
 			cardsOnTable += theRiver.toString();
 		}
 		
-		System.out.println(players[playerIndex].displayHand());
+		System.out.println(players[playerIndex].getHand().displayHand(players[playerIndex].getName()));
 		System.out.println("Cards on table: " + cardsOnTable);
 		
 		
