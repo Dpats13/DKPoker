@@ -9,7 +9,7 @@ public class Player {
 	
 	public Player(){
 		name = "";
-		hand = new Card[2];
+		hand = new Card[7];
 		money = 100;
 		handRank = 0;
 		currentHandIndex = 2;
@@ -20,7 +20,7 @@ public class Player {
 	}
 	
 	public void clearHand(){
-		hand = new Card[2];
+		hand = new Card[7];
 	}
 	
 	public void bet(int amount){
