@@ -2,25 +2,25 @@ package dkpoker.main.game;
 
 public class Player {
 	private String name;
-	private Card hand[];
+	private Hand hand;
 	private int money;
 	private int handRank;
 	private int currentHandIndex;
 	
 	public Player(){
 		name = "";
-		hand = new Card[2];
+		hand = new Hand();
 		money = 100;
 		handRank = 0;
 		currentHandIndex = 2;
 	}
 	
 	public void setHand(Card card[]){
-		this.hand = card;
+		this.hand.setPlayerHand(card);
 	}
 	
 	public void clearHand(){
-		hand = new Card[2];
+		this.hand.setPlayerHand(new Card[7]);
 	}
 	
 	public void bet(int amount){
@@ -46,32 +46,34 @@ public class Player {
 	public void setMoney(int money) {
 		this.money = money;
 	}
-
-	public Card[] getHand() {
-		return hand;
-	}
 	
-	public String displayHand() {
-		if (hand[0] != null) {
-			return name + "'s hand: " + hand[0].toString() + ", " + hand[1].toString();
-		}
-		else {
-			
-			return "Cards not dealt yet";
-		}
-		
-	}
 	public int setHandRank(Card[] hand){
 		int rank = 0;	
 		return rank;
 	}
 	public String displayPlayer(){
-		return (this.getName() + ":\n" + this.displayHand() + "\n    Money: " + this.getMoney() + "\n");	
+		return (this.getName() + ":\n" + this.hand.displayHand(this.getName()).toString() + "\n    Money: " + this.getMoney() + "\n");	
 	}
 	
 	public void addToHand(Card card) {
-		this.hand[currentHandIndex] = card;
+		this.hand.setCardAtIndex(currentHandIndex, card);
 		currentHandIndex++;
+	}
+
+	public Hand getHand() {
+		return hand;
+	}
+
+	public void setHand(Hand hand) {
+		this.hand = hand;
+	}
+
+	public int getHandRank() {
+		return handRank;
+	}
+
+	public void setHandRank(int handRank) {
+		this.handRank = handRank;
 	}
 
 	public int getCurrentHandIndex() {
