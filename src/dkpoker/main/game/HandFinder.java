@@ -6,75 +6,92 @@ public class HandFinder {
 
 	}
 
-	public int findHandRank(Hand hand){
-		int rank = 0;
+	public void findHandRank(Hand hand){
+		Card[] bestHand = new Card[5];
 		
-		if(checkRoyalFlush(hand)){
-			rank = 9;
-		}else if(checkStraightFlush(hand)){
-			rank = 8;
-		}else if(checkFourOfAKind(hand)){
-			rank = 7;
-		}else if(checkFullHouse(hand)){
-			rank = 6;
-		}else if(checkFlush(hand)){
-			rank = 5;
-		}else if(checkStraight(hand)){
-			rank = 4;
-		}else if(checkThreeOfAKind(hand)){
-			rank = 3;
-		}else if(checkTwoPair(hand)){
-			rank = 2;
-		}else if(checkPair(hand)){
-			rank = 1;
+		if(checkRoyalFlush(hand) != null){
+			hand.setHandRank(9);
+		}else if(checkStraightFlush(hand) != null){
+			hand.setHandRank(8);
+		}else if(checkFourOfAKind(hand) != null){
+			hand.setHandRank(7);
+		}else if(checkFullHouse(hand) != null){
+			hand.setHandRank(6);
+		}else if(checkFlush(hand) != null){
+			hand.setHandRank(5);
+		}else if(checkStraight(hand) != null){
+			hand.setHandRank(4);
+		}else if(checkThreeOfAKind(hand) != null){
+			hand.setHandRank(3);
+		}else if(checkTwoPair(hand) != null){
+			hand.setHandRank(2);
+		}else if(checkPair(hand) != null){
+			hand.setHandRank(1);
 		}else{
-			rank = 0;
+			hand.setHandRank(0);
 		}
 		
-		return rank;
 	}
 	
 
-	public boolean checkRoyalFlush(Hand hand) {
+	public Card[] checkRoyalFlush(Hand hand) {
+		Card cards[] = new Card[5];
 		
+		return cards;
+	}
+
+	public Card[] checkStraightFlush(Hand hand) {
+		Card cards[] = new Card[5];
 		
-		return false;
+		return cards;
 	}
 
-	public boolean checkStraightFlush(Hand hand) {
-		return false;
+	public Card[] checkFourOfAKind(Hand hand) {
+		Card cards[] = new Card[5];
+		
+		return cards;
 	}
 
-	public boolean checkFourOfAKind(Hand hand) {
-		return false;
+	public Card[] checkFullHouse(Hand hand) {
+		Card cards[] = new Card[5];
+		
+		return cards;
 	}
 
-	public boolean checkFullHouse(Hand hand) {
-		return false;
+	public Card[] checkFlush(Hand hand) {
+		Card cards[] = new Card[5];
+		
+		return cards;
 	}
 
-	public boolean checkFlush(Hand hand) {
-		return false;
+	public Card[] checkStraight(Hand hand) {
+		Card cards[] = new Card[5];
+		
+		return cards;
 	}
 
-	public boolean checkStraight(Hand hand) {
-		return false;
+	public Card[] checkThreeOfAKind(Hand hand) {
+		Card cards[] = new Card[5];
+		
+		return cards;
 	}
 
-	public boolean checkThreeOfAKind(Hand hand) {
-		return false;
+	public Card[] checkTwoPair(Hand hand) {
+		Card cards[] = new Card[5];
+		
+		return cards;
 	}
 
-	public boolean checkTwoPair(Hand hand) {
-		return false;
+	public Card[] checkPair(Hand hand) {
+		Card cards[] = new Card[5];
+		
+		return cards;
 	}
 
-	public boolean checkPair(Hand hand) {
-		return false;
-	}
-
-	public boolean checkHighCard(Hand hand) {
-		return false;
+	public Card[] checkHighCard(Hand hand) {
+		Card cards[] = new Card[5];
+		
+		return cards;
 	}
 
 }
